@@ -38,7 +38,7 @@ RSpec.configure do |config|
       example.run
     end
   end
-  config.include FactotyGirl::Syntax::Methods
+  config.include FactoryGirl::Syntax::Methods
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -68,10 +68,13 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
-Shoulda :: Matchers .configure do | config |
-  config.integrate do | com |
-    # Escolha um quadro de teste: 
-    with.test_framework : rspec 
-    with.library : rails 
-  end 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :active_record
+    with.library :active_model
+    with.library :action_controller
+    # Or, choose the following (which implies all of the above):
+    with.library :rails
+  end
 end
